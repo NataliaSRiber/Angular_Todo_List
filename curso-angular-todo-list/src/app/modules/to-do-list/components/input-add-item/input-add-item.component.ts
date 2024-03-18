@@ -13,7 +13,7 @@ export class InputAddItemComponent {
   // pegando os dados do inputText definido no input do html
   @ViewChild("inputText") public inputText!: ElementRef;
 // emitter vai transmitir eventos para fora. Neste caso a linha abaixo esta deixando "visivel" a função para que outros componentes possam utiliza-lo
-  @Output() public outputListItems = new EventEmitter<IListItems>()
+  @Output() public outputAddListItems = new EventEmitter<IListItems>()
 
   public focusAndAddItem(value: string) {
     if (value) {
@@ -23,11 +23,11 @@ export class InputAddItemComponent {
       this.inputText.nativeElement.value = '';
       // emite para o elemento pai que pegará o objeto abaixo
 
-      const dataAtual = new Date();
-      const timestamp = dataAtual.getTime();
+      const curretDate = new Date();
+      const timestamp = curretDate.getTime();
       const id = `ID ${timestamp}`
 
-      this.outputListItems.emit({
+      this.outputAddListItems.emit({
         id,
         checked: false,
         value
