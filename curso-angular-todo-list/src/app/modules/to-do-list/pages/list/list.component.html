@@ -8,6 +8,8 @@
   @if(addItem()) {
     <button class="btn btn-primary" (click)="addItem.set(false)">Crie uma lista de tarefas</button>
   } @else {
-    <app-input-add-item />
+    <app-input-add-item
+    [inputListItems]="getListItems()"
+    (outputAddListItems)="getInputAndAddItem($event)" />
     }
 </div>
