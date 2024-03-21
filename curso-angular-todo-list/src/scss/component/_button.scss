@@ -1,0 +1,62 @@
+.btn {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  transition: 0.5s;
+
+  border: none;
+  cursor: pointer;
+
+  &.btn-primary,
+  &.btn-primary-circle {
+    background: var(--primary);
+    color: var(--black-010);
+
+    &:hover {
+      background: var(--primary-010);
+      color: var(--white);
+    }
+  }
+
+  &.btn-danger,
+  &.btn-danger-circle {
+    background: var(--red);
+    color: var(--white);
+
+    &:hover {
+      background: var(--red-010);
+    }
+  }
+
+  &.btn-primary,
+  &.btn-danger {
+    border-radius: 50px;
+    font-size: 16px;
+    padding: 10px 20px;
+  }
+
+  &.btn-primary-circle,
+  &.btn-danger-circle {
+    border-radius: 50px;
+    height: 30px;
+    width: 30px;
+
+    &::after {
+      top: 1px;
+      position: relative;
+    }
+  }
+
+  &.btn-primary-circle {
+    &::after {
+      content: url('../../assets//icons/add.svg');
+    }
+  }
+
+  &.btn-danger-circle {
+    &::after {
+      content: url('../../assets//icons/delete.svg');
+    }
+  }
+}
