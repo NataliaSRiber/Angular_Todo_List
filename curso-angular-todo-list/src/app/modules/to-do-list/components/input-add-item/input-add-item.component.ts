@@ -1,10 +1,11 @@
-import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Output, ViewChild, inject } from '@angular/core';
+import { ChangeDetectorRef, Component, ElementRef, EventEmitter, Input, Output, ViewChild, inject } from '@angular/core';
 import { IListItems } from '../../interface/IListItems.interface';
+import { JsonPipe, NgClass } from '@angular/common';
 
 @Component({
   selector: 'app-input-add-item',
   standalone: true,
-  imports: [],
+  imports: [NgClass],
   templateUrl: './input-add-item.component.html',
   styleUrl: './input-add-item.component.scss'
 })
@@ -12,6 +13,10 @@ export class InputAddItemComponent {
   #cdr = inject(ChangeDetectorRef);
   // pegando os dados do inputText definido no input do html
   @ViewChild("inputText") public inputText!: ElementRef;
+
+  // items pegos do local storage
+  @Input({ required: true }) public inputListItems: IListItems[] = []
+
 // emitter vai transmitir eventos para fora. Neste caso a linha abaixo esta deixando "visivel" a função para que outros componentes possam utiliza-lo
   @Output() public outputAddListItems = new EventEmitter<IListItems>()
 
