@@ -2,8 +2,8 @@
   @if(inputListItems.length) {
     <h1>Minha Lista</h1>
   }
-  <div>
-    <label class="input-lable-text">
+  <div [ngClass]="{ 'container': inputListItems.length }">
+    <label class="input-lable-text" [ngClass]="{  'remove-margin-bottom': !inputListItems.length }">
       <input
         type="text"
         placeholder="Adicione um novo item"
@@ -11,7 +11,6 @@
         autofocus
         (keyup.enter)="focusAndAddItem(inputText.value)"
         #inputText
-        [ngClass]="{ 'remove-margin-bottom': inputListItems.length}"
       />
 
       <button class="btn btn-primary-circle" title="Adicionar um novo item" (click)="focusAndAddItem(inputText.value)"></button>
