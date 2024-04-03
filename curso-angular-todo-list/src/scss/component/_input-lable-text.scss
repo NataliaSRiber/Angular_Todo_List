@@ -1,4 +1,4 @@
-.input-lable-text {
+.input-label-text {
   height: 40px;
   width: 100%;
 
@@ -10,14 +10,16 @@
   border-radius: 50px;
   background: var(--black-010);
   margin-bottom: 20px;
-  padding: 15px;
+  padding: 5px;
 
   input[type="text"] {
     background: none;
     border: none;
     color: var(--white);
+
     outline: 0;
     width: 85%;
+    margin-left: 10px;
   }
 
   input[type="checkbox"] {
