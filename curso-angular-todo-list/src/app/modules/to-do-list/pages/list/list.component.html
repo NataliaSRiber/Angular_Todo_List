@@ -25,13 +25,16 @@
     <h2>Pendências</h2>
     <app-input-list-item [inputListItems]="listItemsStage('pending')"
     (outputUpdateItemCheckbox)="updateItemCheckbox($event)"
+    (outputUpdateItemText)="updateItemText($event)"
     />
   }
 
   @if(listItemsStage('completed').length) {
     <h2>Concluídas</h2>
-    <app-input-list-item [inputListItems]="listItemsStage('completed')"
+    <app-input-list-item
+    [inputListItems]="listItemsStage('completed')"
     (outputUpdateItemCheckbox)="updateItemCheckbox($event)"
+    (outputUpdateItemText)="updateItemText($event)"
     />
   }
 </main>

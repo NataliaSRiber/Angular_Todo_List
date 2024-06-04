@@ -18,7 +18,15 @@ export class InputListItemComponent {
   }>();
   // quando a pessoa clicar no checkbox será verificado se este esta checado ou nao e receberá o id
   public updateItemCheckbox(id: string, checked: boolean) {
-
     return this.outputUpdateItemCheckbox.emit({ id, checked });
+  }
+
+  @Output() public outputUpdateItemText = new EventEmitter<{
+    id: string;
+    value: string;
+  }>();
+
+  public updateItemText(id: string, value: string) {
+    return this.outputUpdateItemText.emit({ id, value });
   }
 }
