@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { IListItems } from '../../interface/IListItems.interface';
 
 @Component({
@@ -9,6 +9,16 @@ import { IListItems } from '../../interface/IListItems.interface';
   styleUrl: './input-list-item.component.scss'
 })
 export class InputListItemComponent {
-  @Input({ required: true }) public inputListItems: IListItems[] = []
+  @Input({ required: true }) public inputListItems: IListItems[] = [];
 
+  // envia as informações para o componente pai tratar
+  @Output() public outputUpdateItemCheckbox = new EventEmitter<{
+    id: string;
+    checked: boolean;
+  }>();
+  // quando a pessoa clicar no checkbox será verificado se este esta checado ou nao e receberá o id
+  public updateItemCheckbox(id: string, checked: boolean) {
+
+    return this.outputUpdateItemCheckbox.emit({ id, checked });
+  }
 }
