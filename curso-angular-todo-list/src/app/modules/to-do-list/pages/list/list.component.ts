@@ -1,4 +1,5 @@
 import { Component, signal } from '@angular/core';
+import Swal from 'sweetalert2';
 import { InputAddItemComponent } from '../../components/input-add-item/input-add-item.component';
 import { IListItems } from '../../interface/IListItems.interface';
 import { JsonPipe } from '@angular/common';
@@ -79,14 +80,41 @@ export class ListComponent {
   }
 
   public deleteItem(id: string) {
-    this.#setListItems.update((oldValue: IListItems[]) => {
-      return oldValue.filter((res) => res.id !== id)
+
+    Swal.fire({
+      title: "Você tem certeza?",
+      text: "Você não poderá reverter esta ação!",
+      icon: "warning",
+      showCancelButton: true,
+      // confirmButtonColor: "#3085d6",
+      // cancelButtonColor: "#d33",
+      confirmButtonText: "Sim, delete o item!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.#setListItems.update((oldValue: IListItems[]) => {
+          return oldValue.filter((res) => res.id !== id)
+        });
+        return this.#updateLocalStorage();
+      }
     });
-    return this.#updateLocalStorage();
+
   }
 
   public deleteAllItems() {
-    localStorage.removeItem(ELocalStorage.MY_LIST);
-    return this.#setListItems.set(this.#parseItems());
+
+    Swal.fire({
+      title: "Você tem certeza?",
+      text: "Você não poderá reverter esta ação!",
+      icon: "warning",
+      showCancelButton: true,
+      // confirmButtonColor: "#3085d6",
+      // cancelButtonColor: "#d33",
+      confirmButtonText: "Sim, delete tudo!"
+    }).then((result) => {
+      if (result.isConfirmed) {
+        localStorage.removeItem(ELocalStorage.MY_LIST);
+        return this.#setListItems.set(this.#parseItems());
+      }
+    });
   }
 }
