@@ -3,6 +3,7 @@ import { InputAddItemComponent } from '../../components/input-add-item/input-add
 import { IListItems } from '../../interface/IListItems.interface';
 import { JsonPipe } from '@angular/common';
 import { InputListItemComponent } from '../../components/input-list-item/input-list-item.component';
+import { ELocalStorage } from '../../enum/ELocalStorage.enum';
 
 @Component({
   selector: 'app-list',
@@ -19,13 +20,13 @@ export class ListComponent {
   public getListItems = this.#setListItems.asReadonly();
 
   #parseItems() {
-    return JSON.parse(localStorage.getItem('@my-list') || '[]')
+    return JSON.parse(localStorage.getItem(ELocalStorage.MY_LIST) || '[]')
   }
 
   // funcao para captar as informações fornecidas pelo filho input-add-item
   public getInputAndAddItem(value: IListItems) {
     localStorage.setItem(
-      '@my-list', JSON.stringify([...this.#setListItems(), value])
+      ELocalStorage.MY_LIST, JSON.stringify([...this.#setListItems(), value])
     );
 
     return this.#setListItems.set(this.#parseItems());
@@ -54,7 +55,7 @@ export class ListComponent {
       })
       return oldValue
     });
-    return localStorage.setItem('@my-list', JSON.stringify(this.#setListItems()))
+    return localStorage.setItem(ELocalStorage.MY_LIST, JSON.stringify(this.#setListItems()))
   }
 
   public updateItemText(newItem: { id: string, value: string }) {
@@ -68,18 +69,18 @@ export class ListComponent {
       })
       return oldValue
     });
-    return localStorage.setItem('@my-list', JSON.stringify(this.#setListItems()))
+    return localStorage.setItem(ELocalStorage.MY_LIST, JSON.stringify(this.#setListItems()))
   }
 
-  public deleteItemText(id: string) {
+  public deleteItem(id: string) {
     this.#setListItems.update((oldValue: IListItems[]) => {
       return oldValue.filter((res) => res.id !== id)
     });
-    return localStorage.setItem('@my-list', JSON.stringify(this.#setListItems()))
+    return localStorage.setItem(ELocalStorage.MY_LIST, JSON.stringify(this.#setListItems()))
   }
 
   public deleteAllItems() {
-    localStorage.removeItem('@my-list');
+    localStorage.removeItem(ELocalStorage.MY_LIST);
     return this.#setListItems.set(this.#parseItems());
   }
 }
