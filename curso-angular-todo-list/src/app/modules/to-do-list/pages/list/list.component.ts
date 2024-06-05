@@ -23,6 +23,12 @@ export class ListComponent {
     return JSON.parse(localStorage.getItem(ELocalStorage.MY_LIST) || '[]')
   }
 
+  #updateLocalStorage() {
+    return localStorage.setItem(
+      ELocalStorage.MY_LIST, JSON.stringify(this.#setListItems())
+    );
+  }
+
   // funcao para captar as informações fornecidas pelo filho input-add-item
   public getInputAndAddItem(value: IListItems) {
     localStorage.setItem(
@@ -55,7 +61,7 @@ export class ListComponent {
       })
       return oldValue
     });
-    return localStorage.setItem(ELocalStorage.MY_LIST, JSON.stringify(this.#setListItems()))
+    return this.#updateLocalStorage();
   }
 
   public updateItemText(newItem: { id: string, value: string }) {
@@ -69,14 +75,14 @@ export class ListComponent {
       })
       return oldValue
     });
-    return localStorage.setItem(ELocalStorage.MY_LIST, JSON.stringify(this.#setListItems()))
+    return this.#updateLocalStorage();
   }
 
   public deleteItem(id: string) {
     this.#setListItems.update((oldValue: IListItems[]) => {
       return oldValue.filter((res) => res.id !== id)
     });
-    return localStorage.setItem(ELocalStorage.MY_LIST, JSON.stringify(this.#setListItems()))
+    return this.#updateLocalStorage();
   }
 
   public deleteAllItems() {
